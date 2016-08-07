@@ -42,6 +42,11 @@
 #ifndef INITDB_H
 #define INITDB_H
 
+#define HOST "localhost"
+#define DATABASE "buurtijd_test"
+#define USER "testuser"
+#define PASSWORD "HiDrNick!"
+
 #include <QtSql>
 
 void addBook(QSqlQuery &q, const QString &title, int year, const QVariant &authorId,
@@ -72,23 +77,28 @@ QVariant addAuthor(QSqlQuery &q, const QString &name, const QDate &birthdate)
 
 QSqlError initDb()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(":memory:");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName(HOST);
+    db.setDatabaseName(DATABASE);
+    db.setUserName(USER);
+    db.setPassword(PASSWORD);
 
     if (!db.open())
         return db.lastError();
 
+    qDebug() << "Connected to database at " << HOST; // settings.value("db/host").toString();
+/**
     QStringList tables = db.tables();
     if (tables.contains("books", Qt::CaseInsensitive)
         && tables.contains("authors", Qt::CaseInsensitive))
         return QSqlError();
 
     QSqlQuery q;
-    if (!q.exec(QLatin1String("create table books(id integer primary key, title varchar, author integer, genre integer, year integer, rating integer)")))
+    if (!q.exec(QLatin1String("create table books(id integer primary key, title varchar(100), author integer, genre integer, year integer, rating integer)")))
         return q.lastError();
-    if (!q.exec(QLatin1String("create table authors(id integer primary key, name varchar, birthdate date)")))
+    if (!q.exec(QLatin1String("create table authors(id integer primary key, name varchar(100), birthdate date)")))
         return q.lastError();
-    if (!q.exec(QLatin1String("create table genres(id integer primary key, name varchar)")))
+    if (!q.exec(QLatin1String("create table genres(id integer primary key, name varchar(100))")))
         return q.lastError();
 
     if (!q.prepare(QLatin1String("insert into authors(name, birthdate) values(?, ?)")))
@@ -118,7 +128,7 @@ QSqlError initDb()
     addBook(q, QLatin1String("Guards! Guards!"), 1989, pratchettId, fantasy, 3);
     addBook(q, QLatin1String("Night Watch"), 2002, pratchettId, fantasy, 3);
     addBook(q, QLatin1String("Going Postal"), 2004, pratchettId, fantasy, 3);
-
+**/
     return QSqlError();
 }
 
