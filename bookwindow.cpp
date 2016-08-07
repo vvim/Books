@@ -119,3 +119,25 @@ void BookWindow::showError(const QSqlError &err)
                 "Error initializing database: " + err.text());
 }
 
+
+void BookWindow::on_saveToDbButton_clicked()
+{
+    qDebug() << "saving to database";
+
+    /**
+       the following StackOverflow answer has been very helpful to me: http://stackoverflow.com/a/24146037/
+    **/
+
+    model->database().transaction();
+
+    if(model->submitAll())
+    {
+        qDebug() << "submitAll is successful, committing";
+        model->database().commit();
+    }
+    else
+    {
+        qDebug() << "submitAll FAILED, rollback";
+        model->database().rollback();
+    }
+}

@@ -54,6 +54,9 @@ class BookWindow: public QMainWindow
 public:
     BookWindow();
 
+private slots:
+    void on_saveToDbButton_clicked();
+
 private:
     void showError(const QSqlError &err);
     Ui::BookWindow ui;
