@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>601</width>
+    <width>619</width>
     <height>420</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>Books</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
      <number>6</number>
     </property>
@@ -150,10 +150,46 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="saveToDbButton">
-      <property name="text">
-       <string>Save to database</string>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="title">
+       <string>GroupBox</string>
       </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="insertRowButton">
+         <property name="text">
+          <string>New Book</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="removeRowButton">
+         <property name="text">
+          <string>Remove Book</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="saveToDbButton">
+         <property name="text">
+          <string>Save to database</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>

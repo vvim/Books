@@ -57,6 +57,11 @@ public:
 private slots:
     void on_saveToDbButton_clicked();
 
+    void on_insertRowButton_clicked();
+
+    void on_removeRowButton_clicked();
+
+
 private:
     void showError(const QSqlError &err);
     Ui::BookWindow ui;

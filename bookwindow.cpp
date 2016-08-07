@@ -141,3 +141,35 @@ void BookWindow::on_saveToDbButton_clicked()
         model->database().rollback();
     }
 }
+
+void BookWindow::on_insertRowButton_clicked()
+{
+    qDebug() << "new book: insert row in model";
+    int row = model->rowCount();
+    qDebug() << "inserting new row" << row;
+    if(model->insertRow(row))
+    {
+        qDebug() << ".. successful new book";
+    }
+    else
+    {
+        qDebug() << ".. FAILED" << model->database().lastError().text();
+    }
+
+}
+
+void BookWindow::on_removeRowButton_clicked()
+{
+    qDebug() << "remove book: remove row from model";
+    QModelIndex currentindex = ui.bookTable->currentIndex();
+    int row = currentindex.row();
+    qDebug() << "removing selected book nr" << row;
+    if(model->removeRows(row,1))
+    {
+        qDebug() << ".. successful removed";
+    }
+    else
+    {
+        qDebug() << ".. FAILED" << model->database().lastError().text();
+    }
+}
